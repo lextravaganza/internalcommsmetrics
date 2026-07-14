@@ -1,0 +1,86 @@
+# How to host your dashboard on GitHub Pages and embed it in Confluence
+
+---
+
+## Part 1 — Put the file on GitHub Pages
+
+### 1. Create a GitHub account
+If you don't have one, go to **github.com** and sign up. Free tier is fine.
+
+### 2. Create a new repository
+1. Click the **+** in the top right → **New repository**
+2. Name it something like `ic-dashboard`
+3. Set it to **Public** (required for free GitHub Pages)
+4. Check **"Add a README file"**
+5. Click **Create repository**
+
+### 3. Upload your HTML file
+1. Inside the repo, click **Add file → Upload files**
+2. Drag your `people-team-comms-dashboard.html` file onto the page
+3. **Important:** rename it to `index.html` before uploading, or GitHub Pages won't serve it as the root URL
+4. Scroll down and click **Commit changes**
+
+### 4. Enable GitHub Pages
+1. Go to your repo's **Settings** tab
+2. In the left sidebar, click **Pages**
+3. Under "Branch", select **main** and keep the folder as **/ (root)**
+4. Click **Save**
+5. Wait about 60 seconds, then refresh — you'll see a green banner with your URL:
+   `https://yourusername.github.io/ic-dashboard/`
+
+That's your live dashboard URL. Open it in a browser to confirm it loads correctly with fonts and all tabs working.
+
+---
+
+## Part 2 — Embed it in Confluence
+
+### Option A — iframe macro (most common)
+1. Open the Confluence page you want to embed on (or create a new one)
+2. Click in the editor body and type `/` to open the insert menu
+3. Search for **iframe** and select it
+4. Paste your GitHub Pages URL into the src field
+5. Set height to **900** (px)
+6. Click **Insert**
+7. Hit **Publish** on the Confluence page
+
+### Option B — HTML macro (if available in your instance)
+1. Type `/` in the editor → search for **HTML**
+2. If it appears, click it — a code editor opens
+3. Paste this snippet:
+   ```html
+   <iframe 
+     src="https://yourusername.github.io/ic-dashboard/" 
+     width="100%" 
+     height="900" 
+     frameborder="0"
+     style="border:none;">
+   </iframe>
+   ```
+4. Click **Save** on the macro, then **Publish** the page
+
+---
+
+## Troubleshooting
+
+**Macro doesn't appear when I type `/`**
+The HTML or iframe macro may be disabled for your Confluence space. Ask your IT or Atlassian admin to enable it for the People Team space — it's a one-click setting in the Confluence admin panel.
+
+**Dashboard loads but fonts look different**
+GitHub Pages serves over HTTPS which allows Google Fonts to load. This is expected — it'll look right when embedded via the live URL.
+
+**Dashboard looks cut off in Confluence**
+Increase the iframe height. Try 1000 or 1100px. You can also add `scrolling="yes"` to the iframe tag to let people scroll inside it.
+
+**I want to update the dashboard later**
+Just go back to your GitHub repo, click the `index.html` file, click the pencil (Edit) icon, and paste in your new HTML. Or upload a new file to replace it. Changes go live within a minute.
+
+---
+
+## Quick reference
+
+| Thing | Where to find it |
+|---|---|
+| Your GitHub repo | `github.com/yourusername/ic-dashboard` |
+| Your live dashboard URL | `https://yourusername.github.io/ic-dashboard/` |
+| Confluence iframe macro | Type `/` in editor → search "iframe" |
+| Change iframe height | Edit the macro → height field |
